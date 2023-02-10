@@ -9,7 +9,7 @@
 - 基于 mysql 的讲解
 - 还有其他 pipe、权限控制、邮件服务、jwt 的 token 令牌支持以及鉴权、任务队列、文件上传文件下载等等
 
-### 1、swagger 文档支持
+### 一、swagger 文档支持
 
 - OpenAPI(Swagger)规范是一种用于描述 RESTful API 的强大定义格式。 Nest 提供了一个专用模块来使用它。
 
@@ -29,9 +29,9 @@ npm install --save @nestjs/swagger fastify-swagger
 
 官网地址：https://docs.nestjs.cn/9/recipes?id=%e8%b7%af%e7%94%b1%e6%a8%a1%e5%9d%97
 
-主要是：配置两类 main.ts
+主要是：配置两类 main.ts 和 Controller 文件
 
-### 2、日志支持
+### 二、日志支持
 
 1、Nest 附带一个默认的内部日志记录器实现，它在实例化过程中以及在一些不同的情况下使用，比如发生异常等等（例如系统记录）。这由 @nestjs/common 包中的 Logger 类实现。你可以全面控制如下的日志系统的行为：
 
