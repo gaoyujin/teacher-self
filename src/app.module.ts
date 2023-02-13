@@ -13,16 +13,15 @@ import configuration from './config/configuration';
 @Dependencies(DataSource)
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'test',
-      entities: [User],
-      autoLoadEntities: true,
-      synchronize: true,
+    ConfigModule.forRoot({
+      //作用于全局
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule], // 数据库配置项依赖于ConfigModule，需在此引入
+      useFactory: (config: ConfigService) => config.get('database'),
+      inject: [ConfigService],
     }),
     PhotoModule,
     UsersModule,

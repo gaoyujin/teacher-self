@@ -98,6 +98,12 @@ npm i --save @nestjs/config
 
 - 先进行数据库配置，然后看具体的实现
 
+- 完成数据库配置后，继续配置的修改
+
+```
+npm i --save @nestjs/config
+```
+
 ### 五、数据库集成
 
 - Nest 与数据库无关，允许您轻松地与任何 SQL 或 NoSQL 数据库集成。根据您的偏好，您有许多可用的选项。一般来说，将 Nest 连接到数据库只需为数据库加载一个适当的 Node.js 驱动程序，就像使用 Express 或 Fastify 一样。
