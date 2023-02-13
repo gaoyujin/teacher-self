@@ -1,4 +1,4 @@
-## （第一步）选择的原因列举几个
+## （第一步）选择 nestjs 的原因列举几个
 
 - swagger 文档支持
 - 日志支持
@@ -7,7 +7,7 @@
 - 监控
 - jwt 的 token 令牌支持以及鉴权
 - 基于 mysql 的讲解
-- 还有其他 pipe、权限控制、邮件服务、jwt 的 token 令牌支持以及鉴权、任务队列、文件上传文件下载等等
+- 还有其他 pipe、中间件、权限控制、邮件服务、jwt 的 token 令牌支持以及鉴权、任务队列、文件上传文件下载等等
 
 ### 一、swagger 文档支持
 
@@ -49,9 +49,11 @@ npm install --save @nestjs/swagger fastify-swagger
 
 ```
 const app = await NestFactory.create(ApplicationModule, {
-  logger: ['error', 'warn'],
+  logger: ['error', 'warn'], // false 就是禁用日志
 });
 await app.listen(3000);
 ```
 
 3、 支持多种的日志整合：默认日志、自定义日志（MyLogger implements LoggerService）、扩展内置的日志类、中间件实现日志，都是依赖注入的，所以支持扩展。
+
+样例代码是以 中间件 为模式编写的。
