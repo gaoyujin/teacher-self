@@ -7,9 +7,9 @@
 - 日志支持
 - 错误处理支持
 - config 配置
+- 数据库集成
 - 监控
 - jwt 的 token 令牌支持以及鉴权
-- 基于 mysql 的讲解
 - 还有其他 pipe、中间件、权限控制、邮件服务、jwt 的 token 令牌支持以及鉴权、任务队列、文件上传文件下载等等
 
 ### 一、swagger 文档支持
@@ -85,3 +85,50 @@ await app.listen(3000);
 @Catch() 装饰器绑定所需的元数据到异常过滤器上。它告诉 Nest 这个特定的过滤器正在寻找 HttpException 而不是其他的。在实践中，@Catch() 可以传递多个参数，所以你可以通过逗号分隔来为多个类型的异常设置过滤器。
 
 访问路径：http://localhost:3000/exception?id11={参数内容} ，则可以看到自定义的异常内容。
+
+### 四、配置
+
+- 应用程序通常在不同的环境中运行。根据环境的不同，应该使用不同的配置设置。例如，通常本地环境依赖于特定的数据库凭据，仅对本地 DB 实例有效。生产环境将使用一组单独的 DB 凭据。由于配置变量会更改，所以最佳实践是将配置变量存储在环境中。
+
+- 首先，您必须安装所需的包：
+
+```
+npm i --save @nestjs/config
+```
+
+- 先进行数据库配置，然后看具体的实现
+
+### 五、数据库集成
+
+- Nest 与数据库无关，允许您轻松地与任何 SQL 或 NoSQL 数据库集成。根据您的偏好，您有许多可用的选项。一般来说，将 Nest 连接到数据库只需为数据库加载一个适当的 Node.js 驱动程序，就像使用 Express 或 Fastify 一样。
+- 您还可以直接使用任何通用的 Node.js 数据库集成库或 ORM ，例如 Sequelize (recipe)和 TypeORM ，以在更高的抽象级别上进行操作。
+
+- TypeORM 集成：
+
+```
+npm install --save @nestjs/typeorm typeorm mysql2
+```
+
+- 数据库服务器安装好相关的 SQL，通过以下配置，完成数据库的配置信息：
+
+```
+import { join } from 'path';
+export default {
+  type: 'mysql',
+  host: 'localhost',
+  //socketPath: '/tmp/mysql.sock',
+  port: 3306,
+  username: 'root',
+  password: 'root',
+  database: 'nest',
+  entities: [join(__dirname, '../', '**/**.entity{.ts,.js}')],
+  synchronize: true, // 设置 synchronize: true 不能被用于生产环境，否则您可能会丢失生产环境数据
+};
+
+```
+
+具体的配置说明：https://typeorm.io/data-source-options
+
+- 配置数据库的实现
+
+官网地址：https://docs.nestjs.cn/9/techniques?id=%e6%95%b0%e6%8d%ae%e5%ba%93
